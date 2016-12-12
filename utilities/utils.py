@@ -6,6 +6,8 @@ backend_use('Agg') # fixes #32 - change backend to simple one, BEFORE any other 
 from matplotlib import pyplot as plt
 plt.ioff()  # fixes #32 - no need for an interactive backend
 import mpld3
+from utilities.radar import _radar_factory
+
 
 class ClickSendToBack(mpld3.plugins.PluginBase):
     """Plugin for sending element to the back. Combined https://mpld3.github.io/notebooks/custom_plugins.html and http://bl.ocks.org/eesur/4e0a69d57d3bfc8a82c2"""
@@ -213,3 +215,18 @@ def save_csv (csv_path, cur_tracked_metrics_for_csv):
         return True
     except:
         return False
+
+
+def save_kiviat (labels, values, file_name, title):
+    theta = _radar_factory(len(labels))
+    fig = plt.figure()
+    ax = fig.add_subplot(1, 1, 1, projection='radar')
+    #ax.plot(theta, values, color='k')
+    max_vals = [max(values)] * len(values)
+    ax.fill(theta, max_vals, facecolor='deepskyblue', alpha=0.25) # background
+    ax.plot(theta, values, color='r')
+    ax.fill(theta, values, facecolor='r', alpha=0.25)
+    ax.set_varlabels(labels)
+    plt.title(title)
+    plt.savefig(file_name, dpi=72)
+    print("Saved %s" % file_name)
