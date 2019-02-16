@@ -1,0 +1,18 @@
+{
+    "File": [{
+        "xMetric": "CountLineCode",
+        "yMetric": "MaxCyclomaticModified",
+        "ballMetric": "CountDeclClass",
+        "xMetricMinValue": 100,
+        "yMetricMinValue": 10,
+        "ballMetricMinValue": 0
+    }],
+    "Routine": [{
+        "xMetric": "CountLineCode",
+        "yMetric": "CyclomaticModified",
+        "ballMetric": "CountParams",
+        "xMetricMinValue": 10,
+        "yMetricMinValue": 5,
+        "ballMetricMinValue": 1
+    }]
+}

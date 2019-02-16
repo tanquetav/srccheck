@@ -1,0 +1,7 @@
+{
+    "CountParams": 8,
+    "AVG:CountParams": 2,
+    "CountLineCode": 100,
+    "AVG:CountLineCode": 40,
+    "CyclomaticModified": 70
+}

@@ -1,0 +1,1 @@
+python utilities/srccheck.py --dbin=/tmp/data.db --verbose --maxFileMetrics=./metrics/srccheck-file.json --maxClassMetrics=./metrics/srccheck-class.json --maxRoutineMetrics=./metrics/srccheck-routine.json --maxPrjMetrics=./metrics/srccheck-project.json --outputCSV=srcmetrics.csv
