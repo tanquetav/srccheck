@@ -1,7 +1,8 @@
 """Source Code Stats Scatter Plot.
 
 Usage:
-  srcscatterplot    --in=<inputUDB> \r\n \
+  srcscatterplot    [--in=<inputUDB>] \r\n \
+                    [--dbin=<inputUDB>] \r\n \
                     [--outputDir=<path to dir where to save files>] \r\n \
                     [--dllDir=<dllDir>]\r\n \
                     [--skipLibs=<skipLibs>]\r\n \
@@ -124,17 +125,24 @@ def main():
     sys.path.append(arguments["--dllDir"]) # add the dir with the DLL to interop with understand
     print ("\r\n====== srcscatterplot by Marcio Marchini: marcio@BetterDeveloper.net ==========")
     print(arguments)
-    try:
-        import understand
-    except:
-        print ("Can' find the Understand DLL. Use --dllDir=...")
-        print ("Please set PYTHONPATH to point an Understand's C:/Program Files/SciTools/bin/pc-win64/python or equivalent")
-        sys.exit(-1)
-    try:
-        db = understand.open(arguments["--in"])
-    except understand.UnderstandError as exc:
-        print ("Error opening input file: %s" % exc)
-        sys.exit(-2)
+    if arguments['--in']:
+        try:
+            import understand
+        except:
+            print ("Can' find the Understand DLL. Use --dllDir=...")
+            print ("Please set PYTHONPATH to point an Understand's C:/Program Files/SciTools/bin/pc-win64/python or equivalent")
+            sys.exit(-1)
+        try:
+            db = understand.open(arguments["--in"])
+        except understand.UnderstandError as exc:
+            print ("Error opening input file: %s" % exc)
+            sys.exit(-2)
+    elif arguments['--dbin']:
+        from utilities.sqldb import SqlDb
+        db=SqlDb(arguments['--dbin'])
+    else:
+        print ("Missing db")
+        sys.exit(-3)
 
     print("Processing %s" % db.name())
     end_time = datetime.datetime.now()
